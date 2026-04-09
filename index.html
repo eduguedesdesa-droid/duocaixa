@@ -132,6 +132,32 @@ select option{background:var(--input-bg);}
 .chip-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
 .chip{padding:5px 11px;border-radius:99px;font-size:0.68rem;font-weight:600;border:1px solid var(--border);background:var(--input-bg);color:var(--text2);cursor:pointer;transition:all var(--trans);font-family:'Montserrat',sans-serif;}
 .chip.active{background:var(--green);color:#000;border-color:var(--green);}
+
+/* METAS */
+.meta-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px;}
+.meta-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+.meta-name{font-weight:700;font-size:0.9rem;}
+.meta-prazo{font-size:0.65rem;color:var(--text3);margin-top:2px;}
+.meta-vals{text-align:right;}
+.meta-atual{font-size:0.75rem;color:var(--text2);}
+.meta-alvo{font-size:1rem;font-weight:700;color:var(--green);}
+.meta-bar{background:var(--input-bg);border-radius:99px;height:8px;overflow:hidden;margin-bottom:6px;}
+.meta-fill{height:100%;border-radius:99px;background:var(--green);transition:width 0.5s;}
+.meta-footer{display:flex;justify-content:space-between;align-items:center;font-size:0.7rem;color:var(--text2);}
+/* RECORRENTES */
+.rec-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;border-left:3px solid var(--blue);}
+.rec-name{font-weight:600;font-size:0.84rem;}
+.rec-meta{font-size:0.65rem;color:var(--text2);margin-top:2px;}
+.rec-val{font-weight:700;font-size:0.92rem;color:var(--red);}
+/* ALERTAS */
+.alerta-item{border-radius:var(--radius-sm);padding:11px 14px;margin-bottom:8px;border:1px solid;display:flex;align-items:flex-start;gap:10px;}
+.alerta-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px;}
+.alerta-txt{font-size:0.78rem;font-weight:500;line-height:1.5;}
+.alerta-sub{font-size:0.68rem;color:var(--text2);margin-top:2px;}
+.alerta-red{background:rgba(255,90,90,0.06);border-color:rgba(255,90,90,0.2);}
+.alerta-yellow{background:rgba(245,200,66,0.06);border-color:rgba(245,200,66,0.2);}
+.alerta-blue{background:rgba(77,166,255,0.06);border-color:rgba(77,166,255,0.2);}
+.alerta-green{background:rgba(0,201,122,0.06);border-color:rgba(0,201,122,0.2);}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px;}
 </style>
 </head>
@@ -187,6 +213,15 @@ select option{background:var(--input-bg);}
     <button class="nb" onclick="goPage('projecao')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Projeção
     </button>
+    <button class="nb" onclick="goPage('metas')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>Metas
+    </button>
+    <button class="nb" onclick="goPage('recorrentes')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>Fixas
+    </button>
+    <button class="nb" onclick="goPage('alertas')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Alertas
+    </button>
     <button class="nb" onclick="goPage('config')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l-.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Config
     </button>
@@ -196,6 +231,7 @@ select option{background:var(--input-bg);}
   <div id="page-dashboard" class="page active">
     <div class="hero"><div class="hero-lbl">Saldo livre do mês</div><div class="hero-val" id="dSaldo">—</div><div class="hero-sub" id="dSaldoSub">—</div></div>
     <div id="dAlerta"></div>
+    <div id="dAlertasBadge"></div>
     <div class="lim-card"><div class="lim-lbl">Limite de hoje</div><div class="lim-val" id="dLimVal">—</div><div class="lim-info" id="dLimInfo">—</div><div id="dLimTag"></div></div>
     <div class="g2">
       <div class="sc"><div class="slbl">Entradas</div><div class="sval" style="color:var(--green)" id="dEnt">—</div></div>
@@ -378,10 +414,38 @@ select option{background:var(--input-bg);}
   </div>
 </div>
 
+
+  <!-- METAS -->
+  <div id="page-metas" class="page">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div style="font-size:0.75rem;font-weight:700;color:var(--text2)">Metas financeiras</div>
+      <button class="btn primary" style="width:auto;padding:8px 14px" onclick="abrirModalMeta()">+ Nova meta</button>
+    </div>
+    <div id="listaMetas"><div class="spin-wrap"><div class="spin"></div>Carregando...</div></div>
+  </div>
+
+  <!-- RECORRENTES -->
+  <div id="page-recorrentes" class="page">
+    <div class="alert awrn" style="font-size:0.76rem">🔁 Contas fixas cadastradas aqui serão lançadas automaticamente no início de cada mês.</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div style="font-size:0.75rem;font-weight:700;color:var(--text2)">Lançamentos recorrentes</div>
+      <button class="btn primary" style="width:auto;padding:8px 14px" onclick="abrirModalRec()">+ Novo</button>
+    </div>
+    <div id="listaRec"><div class="spin-wrap"><div class="spin"></div>Carregando...</div></div>
+    <button class="btn" style="background:rgba(77,166,255,0.1);border:1px solid rgba(77,166,255,0.3);color:var(--blue);margin-top:4px" onclick="aplicarRecorrentes()">🔁 Aplicar recorrentes neste mês agora</button>
+  </div>
+
+  <!-- ALERTAS -->
+  <div id="page-alertas" class="page">
+    <div style="font-size:0.75rem;font-weight:700;color:var(--text2);margin-bottom:12px">Central de alertas</div>
+    <div id="listaAlertas"><div class="spin-wrap"><div class="spin"></div>Verificando...</div></div>
+  </div>
+
 <!-- MODAL -->
 <div class="modal-bg" id="modal">
   <div class="modal">
     <div class="mhdr"><div class="mtitle" id="mTitle">Novo lançamento</div><button class="mclose" onclick="fecharModal()">✕</button></div>
+    <div id="mEditBadge" style="display:none;background:rgba(77,166,255,0.1);border:1px solid rgba(77,166,255,0.3);color:var(--blue);border-radius:6px;padding:6px 10px;font-size:0.72rem;font-weight:600;margin-bottom:14px">✏️ Modo edição — alterações serão salvas</div>
     <div class="ttog"><button class="tbtn ent" id="mBtnEnt" onclick="setModalTipo('ent')">↑ Entrada</button><button class="tbtn sai" id="mBtnSai" onclick="setModalTipo('sai')">↓ Saída</button></div>
     <div class="fg"><label class="flbl">Descrição</label><input type="text" id="mDesc" placeholder="Ex: Salário, Mercado, Aluguel..."/></div>
     <div class="fg"><label class="flbl">Valor (R$)</label><input type="number" id="mVal" placeholder="0,00" step="0.01"/></div>
@@ -482,7 +546,8 @@ function mostrarApp(){
   document.getElementById('uName').textContent=nome;
   const dot=document.getElementById('uDot');dot.className='dot '+(nome.toLowerCase().includes('edu')?'edu':nome.toLowerCase().includes('dul')?'dul':'out');
   document.getElementById('hjUser').textContent=nome;document.getElementById('hjUser').style.color=nome.toLowerCase().includes('edu')?'var(--blue)':'var(--dul)';
-  renderAll();
+  // Load new data
+  Promise.all([carregarMetas(),carregarRec()]).then(()=>renderAll());
 }
 
 // DADOS
@@ -530,7 +595,10 @@ function rItem(l,compact=false){
     <div style="flex:1"><div class="iname">${l.descricao}</div><div class="imeta">${quem}${l.cat}${!compact?' · '+l.data:''} ${badge}${tipoBadge}</div></div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
       <div class="iamt" style="color:${cor}">${sinal}${fmt(l.valor)}</div>
-      <button class="bsm" onclick="deletarLanc('${l.id}')">✕</button>
+      <div style="display:flex;gap:4px">
+        <button class="bsm" style="color:var(--blue);border-color:rgba(77,166,255,0.3)" onclick="editarLanc('${l.id}')">✏️</button>
+        <button class="bsm" onclick="deletarLanc('${l.id}')">✕</button>
+      </div>
     </div>
   </div>`;
 }
@@ -712,14 +780,49 @@ function renderProjecao(){
 function simular(){const v=parseFloat(document.getElementById('simVal').value)||0;const c=calc();const ns=c.sRest-v,nd=c.dr>0?ns/c.dr:0;const el=document.getElementById('simRes');if(v<=0){el.textContent='Digite um valor para simular.';return;}el.innerHTML=`Se gastar <strong style="color:var(--red)">${fmt(v)}</strong>:<br>Saldo restante: <strong style="color:${ns>=0?'var(--green)':'var(--red)'}">${fmt(ns)}</strong><br>Novo limite/dia: <strong style="color:var(--yellow)">${fmt(Math.max(0,nd))}/dia</strong>`;}
 
 // MODAL
+let editandoId = null;
+
+function editarLanc(id){
+  const l = lancs.find(x=>x.id===id);
+  if(!l) return;
+  editandoId = id;
+  // Define tipo
+  const t = l.tipo==='entrada'?'ent':'sai';
+  setModalTipo(t);
+  // Preenche campos
+  document.getElementById('mDesc').value = l.descricao||'';
+  document.getElementById('mVal').value = l.valor||'';
+  document.getElementById('mQuem').value = l.pessoa||'';
+  document.getElementById('mTipoR').value = l.tipo_registro||'Fixo';
+  document.getElementById('mCat').value = l.cat||'Outros';
+  document.getElementById('mStatus').value = l.status||'realizado';
+  // Converte data DD/MM/YYYY para YYYY-MM-DD
+  if(l.data && l.data!=='—'){
+    const p=l.data.split('/');
+    if(p.length===3) document.getElementById('mData').value=`${p[2]}-${p[1]}-${p[0]}`;
+  }
+  document.getElementById('mTitle').textContent = 'Editar lançamento';
+  document.getElementById('mEditBadge').style.display = 'block';
+  document.getElementById('mBtn').textContent = '💾 Salvar alterações';
+  document.getElementById('modal').classList.add('open');
+}
+
 function abrirModal(tipo){
+  editandoId=null;
+  document.getElementById('mTitle').textContent='Novo lançamento';
+  document.getElementById('mEditBadge').style.display='none';
   mTipo=tipo;setModalTipo(tipo);
   const d=new Date();document.getElementById('mData').value=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
   document.getElementById('mDesc').value='';document.getElementById('mVal').value='';
   document.getElementById('mQuem').value='';
   document.getElementById('modal').classList.add('open');
 }
-function fecharModal(){document.getElementById('modal').classList.remove('open');}
+function fecharModal(){
+  document.getElementById('modal').classList.remove('open');
+  editandoId=null;
+  document.getElementById('mTitle').textContent='Novo lançamento';
+  document.getElementById('mEditBadge').style.display='none';
+}
 document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))fecharModal();});
 function setModalTipo(t){
   mTipo=t;
@@ -738,7 +841,21 @@ async function modalSalvar(){
   let data=hoje();if(di){const[y,m,d]=di.split('-');data=`${d}/${m}/${y}`;}
   const pessoa=quemSel||perfil?.nome||'Usuário';
   document.getElementById('mBtn').textContent='...';
-  await salvarLanc({tipo:mTipo==='ent'?'entrada':'saida',descricao:desc,valor:val,pessoa,cat:mTipo==='sai'?cat:'Receita',data,status,tipo_registro:tipoR});
+  if(editandoId){
+    // EDIÇÃO
+    const updates={descricao:desc,valor:val,pessoa,cat:mTipo==='sai'?cat:'Receita',data,status,tipo_registro:tipoR,tipo:mTipo==='ent'?'entrada':'saida'};
+    const{error}=await sb.from('lancamentos').update(updates).eq('id',editandoId).eq('user_id',user.id);
+    if(!error){
+      const idx=lancs.findIndex(l=>l.id===editandoId);
+      if(idx>=0)lancs[idx]={...lancs[idx],...updates};
+      renderAll();
+    } else {
+      alert('Erro ao editar: '+(error?.message||'tente novamente'));
+    }
+  } else {
+    // NOVO
+    await salvarLanc({tipo:mTipo==='ent'?'entrada':'saida',descricao:desc,valor:val,pessoa,cat:mTipo==='sai'?cat:'Receita',data,status,tipo_registro:tipoR});
+  }
   fecharModal();
 }
 
@@ -774,21 +891,344 @@ async function exportar(){
   XLSX.writeFile(wb,`DuoCaixa_${nomeMes.replace(' ','_')}.xlsx`);
 }
 
+
+// ═══════════════════════════════════════
+// METAS
+// ═══════════════════════════════════════
+let metas=[], editandoMetaId=null, aporteMetaId=null;
+
+async function carregarMetas(){
+  try{const{data,error}=await sb.from('metas').select('*').eq('user_id',user.id).order('created_at',{ascending:false});if(!error&&data)metas=data;}catch(e){}
+}
+
+function abrirModalMeta(id){
+  editandoMetaId=id||null;
+  const m=id?metas.find(x=>x.id===id):null;
+  document.getElementById('mMetaTitle').textContent=m?'Editar meta':'Nova meta';
+  document.getElementById('mMetaEditBadge').style.display=m?'block':'none';
+  document.getElementById('mMetaBtn').textContent=m?'💾 Salvar alterações':'💰 Criar meta';
+  document.getElementById('mMetaNome').value=m?m.nome:'';
+  document.getElementById('mMetaAlvo').value=m?m.alvo:'';
+  document.getElementById('mMetaAtual').value=m?m.atual:'0';
+  document.getElementById('mMetaPrazo').value=m?m.prazo:'';
+  document.getElementById('mMetaDesc').value=m?m.descricao:'';
+  document.getElementById('modalMeta').classList.add('open');
+}
+function fecharModalMeta(){document.getElementById('modalMeta').classList.remove('open');editandoMetaId=null;}
+document.getElementById('modalMeta').addEventListener('click',e=>{if(e.target===document.getElementById('modalMeta'))fecharModalMeta();});
+
+async function salvarMeta(){
+  const nome=document.getElementById('mMetaNome').value.trim();
+  const alvo=parseFloat(document.getElementById('mMetaAlvo').value);
+  const atual=parseFloat(document.getElementById('mMetaAtual').value)||0;
+  const prazo=document.getElementById('mMetaPrazo').value;
+  const descricao=document.getElementById('mMetaDesc').value.trim();
+  if(!nome||!alvo||!prazo){alert('Preencha nome, valor alvo e prazo!');return;}
+  document.getElementById('mMetaBtn').textContent='...';
+  if(editandoMetaId){
+    const{error}=await sb.from('metas').update({nome,alvo,atual,prazo,descricao}).eq('id',editandoMetaId).eq('user_id',user.id);
+    if(!error){const idx=metas.findIndex(x=>x.id===editandoMetaId);if(idx>=0)metas[idx]={...metas[idx],nome,alvo,atual,prazo,descricao};}
+    else alert('Erro: '+error.message);
+  } else {
+    const{data,error}=await sb.from('metas').insert({user_id:user.id,nome,alvo,atual,prazo,descricao}).select().single();
+    if(!error&&data)metas.unshift(data);
+    else alert('Erro: '+(error?.message||'tente novamente'));
+  }
+  fecharModalMeta();
+  renderMetas();
+}
+
+function abrirAporte(id){
+  aporteMetaId=id;
+  const m=metas.find(x=>x.id===id);
+  document.getElementById('mAporteNome').textContent=m?m.nome:'—';
+  document.getElementById('mAporteVal').value='';
+  document.getElementById('modalAporte').classList.add('open');
+}
+async function confirmarAporte(){
+  const v=parseFloat(document.getElementById('mAporteVal').value)||0;
+  if(v<=0){alert('Informe um valor!');return;}
+  const m=metas.find(x=>x.id===aporteMetaId);if(!m)return;
+  const novoAtual=Math.min(m.atual+v,m.alvo);
+  const{error}=await sb.from('metas').update({atual:novoAtual}).eq('id',aporteMetaId).eq('user_id',user.id);
+  if(!error){const idx=metas.findIndex(x=>x.id===aporteMetaId);if(idx>=0)metas[idx].atual=novoAtual;}
+  document.getElementById('modalAporte').classList.remove('open');
+  renderMetas();
+}
+
+async function deletarMeta(id){
+  if(!confirm('Excluir esta meta?'))return;
+  await sb.from('metas').delete().eq('id',id).eq('user_id',user.id);
+  metas=metas.filter(x=>x.id!==id);
+  renderMetas();
+}
+
+function renderMetas(){
+  const el=document.getElementById('listaMetas');
+  if(!metas.length){el.innerHTML='<div class="empty">Nenhuma meta criada ainda.<br>Crie sua primeira meta financeira! 🎯</div>';return;}
+  el.innerHTML=metas.map(m=>{
+    const pct=m.alvo>0?Math.min(100,(m.atual/m.alvo)*100):0;
+    const [ano,mes]=m.prazo.split('-');
+    const prazoFmt=`${MESES[parseInt(mes)-1]} ${ano}`;
+    const hoje2=new Date(),prazoD=new Date(parseInt(ano),parseInt(mes)-1,1);
+    const mesesRest=Math.max(0,(prazoD.getFullYear()-hoje2.getFullYear())*12+(prazoD.getMonth()-hoje2.getMonth()));
+    const falta=Math.max(0,m.alvo-m.atual);
+    const porMes=mesesRest>0?(falta/mesesRest):falta;
+    const concluida=m.atual>=m.alvo;
+    return `<div class="meta-card" style="${concluida?'border-color:rgba(0,201,122,0.4);background:rgba(0,201,122,0.04)':''}">
+      <div class="meta-header">
+        <div>
+          <div class="meta-name">${concluida?'✅ ':'🎯 '}${m.nome}</div>
+          <div class="meta-prazo">Prazo: ${prazoFmt}${mesesRest>0?' · '+mesesRest+' mes'+( mesesRest!==1?'es':''):''}${concluida?' · Meta atingida! 🎉':''}</div>
+          ${m.descricao?`<div style="font-size:0.68rem;color:var(--text3);margin-top:2px">${m.descricao}</div>`:''}
+        </div>
+        <div class="meta-vals">
+          <div class="meta-atual">${fmt(m.atual)}</div>
+          <div class="meta-alvo">${fmt(m.alvo)}</div>
+        </div>
+      </div>
+      <div class="meta-bar"><div class="meta-fill" style="width:${pct}%;${concluida?'background:var(--green)':''}"></div></div>
+      <div class="meta-footer">
+        <span style="font-weight:700;color:${pct>=100?'var(--green)':pct>=50?'var(--yellow)':'var(--text2)'}">${pct.toFixed(0)}% concluída</span>
+        ${!concluida&&mesesRest>0?`<span>Guardar <strong style="color:var(--yellow)">${fmt(porMes)}/mês</strong></span>`:''}
+        ${!concluida&&mesesRest===0?`<span style="color:var(--red)">Prazo encerrado — faltam ${fmt(falta)}</span>`:''}
+      </div>
+      <div style="display:flex;gap:6px;margin-top:10px">
+        ${!concluida?`<button class="btn primary" style="flex:1;padding:8px;font-size:0.75rem" onclick="abrirAporte('${m.id}')">+ Aporte</button>`:''}
+        <button class="btn ghost" style="flex:1;padding:8px;font-size:0.75rem" onclick="abrirModalMeta('${m.id}')">✏️ Editar</button>
+        <button class="bsm" style="padding:8px 10px" onclick="deletarMeta('${m.id}')">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════
+// RECORRENTES
+// ═══════════════════════════════════════
+let recorrentes=[], editandoRecId=null;
+
+async function carregarRec(){
+  try{const{data,error}=await sb.from('recorrentes').select('*').eq('user_id',user.id).order('created_at',{ascending:false});if(!error&&data)recorrentes=data;}catch(e){}
+}
+
+function abrirModalRec(id){
+  editandoRecId=id||null;
+  const r=id?recorrentes.find(x=>x.id===id):null;
+  document.getElementById('mRecTitle').textContent=r?'Editar recorrente':'Nova recorrente';
+  document.getElementById('mRecEditBadge').style.display=r?'block':'none';
+  document.getElementById('mRecBtn').textContent=r?'💾 Salvar':'🔁 Salvar recorrente';
+  document.getElementById('mRecTipo').value=r?r.tipo:'saida';
+  document.getElementById('mRecDesc').value=r?r.descricao:'';
+  document.getElementById('mRecVal').value=r?r.valor:'';
+  document.getElementById('mRecQuem').value=r?r.pessoa:'';
+  document.getElementById('mRecDia').value=r?r.dia:'';
+  document.getElementById('mRecCat').value=r?r.cat:'Contas fixas';
+  document.getElementById('modalRec').classList.add('open');
+}
+function fecharModalRec(){document.getElementById('modalRec').classList.remove('open');editandoRecId=null;}
+document.getElementById('modalRec').addEventListener('click',e=>{if(e.target===document.getElementById('modalRec'))fecharModalRec();});
+
+async function salvarRec(){
+  const tipo=document.getElementById('mRecTipo').value;
+  const descricao=document.getElementById('mRecDesc').value.trim();
+  const valor=parseFloat(document.getElementById('mRecVal').value);
+  const pessoa=document.getElementById('mRecQuem').value||perfil?.nome||'Usuário';
+  const dia=parseInt(document.getElementById('mRecDia').value)||1;
+  const cat=document.getElementById('mRecCat').value;
+  if(!descricao||!valor||valor<=0){alert('Preencha descrição e valor!');return;}
+  document.getElementById('mRecBtn').textContent='...';
+  if(editandoRecId){
+    const{error}=await sb.from('recorrentes').update({tipo,descricao,valor,pessoa,dia,cat}).eq('id',editandoRecId).eq('user_id',user.id);
+    if(!error){const idx=recorrentes.findIndex(x=>x.id===editandoRecId);if(idx>=0)recorrentes[idx]={...recorrentes[idx],tipo,descricao,valor,pessoa,dia,cat};}
+    else alert('Erro: '+error.message);
+  } else {
+    const{data,error}=await sb.from('recorrentes').insert({user_id:user.id,tipo,descricao,valor,pessoa,dia,cat,ativo:true}).select().single();
+    if(!error&&data)recorrentes.unshift(data);
+    else alert('Erro: '+(error?.message||'tente novamente'));
+  }
+  fecharModalRec();
+  renderRec();
+}
+
+async function deletarRec(id){
+  if(!confirm('Excluir esta recorrente?'))return;
+  await sb.from('recorrentes').delete().eq('id',id).eq('user_id',user.id);
+  recorrentes=recorrentes.filter(x=>x.id!==id);
+  renderRec();
+}
+
+async function aplicarRecorrentes(){
+  if(!recorrentes.length){alert('Nenhuma recorrente cadastrada.');return;}
+  const mes=mesAtual(),[a,mm]=mes.split('-').map(Number);
+  let count=0;
+  for(const r of recorrentes){
+    const dia=String(r.dia).padStart(2,'0'),m2=String(mm).padStart(2,'0');
+    const dataStr=`${dia}/${m2}/${a}`;
+    // Verifica se já existe lançamento com mesma descrição e data no mês
+    const jaExiste=lancs.some(l=>l.descricao===r.descricao&&l.data===dataStr);
+    if(!jaExiste){
+      await salvarLanc({tipo:r.tipo,descricao:r.descricao,valor:r.valor,pessoa:r.pessoa||perfil?.nome,cat:r.cat,data:dataStr,status:'previsto',tipo_registro:'Fixo'});
+      count++;
+    }
+  }
+  alert(count>0?`✅ ${count} lançamento(s) aplicado(s)!`:'Todos os lançamentos já existem neste mês.');
+}
+
+function renderRec(){
+  const el=document.getElementById('listaRec');
+  if(!recorrentes.length){el.innerHTML='<div class="empty">Nenhuma recorrente cadastrada.<br>Adicione suas contas fixas para automatizar! 🔁</div>';return;}
+  el.innerHTML=recorrentes.map(r=>`
+    <div class="rec-card" style="${r.tipo==='entrada'?'border-left-color:var(--green)':''}">
+      <div style="flex:1">
+        <div class="rec-name">${r.descricao}</div>
+        <div class="rec-meta">${r.pessoa||'—'} · ${r.cat} · Todo dia ${r.dia}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div class="rec-val" style="color:${r.tipo==='entrada'?'var(--green)':'var(--red)'}">${r.tipo==='entrada'?'+':'-'}${fmt(r.valor)}</div>
+        <div style="display:flex;gap:4px">
+          <button class="bsm" style="color:var(--blue);border-color:rgba(77,166,255,0.3)" onclick="abrirModalRec('${r.id}')">✏️</button>
+          <button class="bsm" onclick="deletarRec('${r.id}')">✕</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ═══════════════════════════════════════
+// ALERTAS INTELIGENTES
+// ═══════════════════════════════════════
+function gerarAlertas(){
+  const alertas=[];
+  const c=calc();
+  const hj=new Date(),hjStr=hoje();
+
+  // 1. Limite diário
+  if(c.limHj<0){
+    alertas.push({tipo:'red',icon:'🚨',txt:'Limite diário ultrapassado',sub:`Você gastou ${fmt(Math.abs(c.limHj))} a mais do que o planejado hoje.`});
+  } else if(c.limHj<c.limBruto*0.3){
+    alertas.push({tipo:'yellow',icon:'⚡',txt:'Limite de hoje quase esgotado',sub:`Restam apenas ${fmt(c.limHj)} para gastar hoje (limite: ${fmt(c.limBruto)}).`});
+  }
+
+  // 2. Saldo negativo
+  if(c.sliv<0){
+    alertas.push({tipo:'red',icon:'💸',txt:'Saldo livre negativo',sub:`As saídas superaram as entradas em ${fmt(Math.abs(c.sliv))}. Revise seus gastos.`});
+  }
+
+  // 3. Contas vencendo nos próximos 3 dias
+  const proximos3=lancs.filter(l=>{
+    if(l.status!=='previsto'||l.tipo!=='saida'||!l.data||l.data==='—')return false;
+    const d=parseD(l.data);if(!d)return false;
+    const diff=(d-hj)/(1000*60*60*24);
+    return diff>=0&&diff<=3;
+  });
+  proximos3.forEach(l=>{
+    const d=parseD(l.data);
+    const diff=Math.round((d-hj)/(1000*60*60*24));
+    alertas.push({tipo:'yellow',icon:'📅',txt:`${l.descricao} vence ${diff===0?'hoje':diff===1?'amanhã':'em '+diff+' dias'}`,sub:`Valor: ${fmt(l.valor)} — ${diff===0?'Vence hoje!':'Vencimento próximo.'}`});
+  });
+
+  // 4. Contas atrasadas (pendentes com data passada)
+  const atrasadas=lancs.filter(l=>{
+    if(l.status!=='previsto'||l.tipo!=='saida'||!l.data||l.data==='—')return false;
+    const d=parseD(l.data);if(!d)return false;
+    d.setHours(0,0,0,0);hj.setHours(0,0,0,0);
+    return d<hj;
+  });
+  atrasadas.forEach(l=>{
+    alertas.push({tipo:'red',icon:'⚠️',txt:`${l.descricao} está em atraso`,sub:`Vencia em ${l.data} · Valor: ${fmt(l.valor)}`});
+  });
+
+  // 5. Reserva não atingida
+  const metaRes=c.tEnt*(pct/100);
+  if(c.tEnt>0&&c.res<metaRes*0.5){
+    alertas.push({tipo:'yellow',icon:'🏦',txt:'Reserva abaixo da meta',sub:`Meta: ${fmt(metaRes)} · Atual: ${fmt(c.res)} · Faltam ${fmt(metaRes-c.res)}.`});
+  }
+
+  // 6. Categorias acima do mês anterior
+  const mesAnt=getMesAnterior();
+  const doMesAnt=getLancsMes(mesAnt).filter(l=>l.tipo==='saida');
+  const doMesAt=getLancsMes().filter(l=>l.tipo==='saida');
+  const cats=['Alimentação','Lazer','Compras online','Cartão de Crédito'];
+  cats.forEach(cat=>{
+    const ant=doMesAnt.filter(l=>l.cat===cat).reduce((a,l)=>a+l.valor,0);
+    const at=doMesAt.filter(l=>l.cat===cat).reduce((a,l)=>a+l.valor,0);
+    if(ant>0&&at>ant*1.3){
+      alertas.push({tipo:'yellow',icon:'📊',txt:`${cat} 30% acima do mês anterior`,sub:`Mês anterior: ${fmt(ant)} · Este mês: ${fmt(at)} (+${fmt(at-ant)})`});
+    }
+  });
+
+  // 7. Metas próximas do prazo
+  metas.forEach(m=>{
+    if(m.atual>=m.alvo)return;
+    const[ano,mes]=m.prazo.split('-');
+    const prazoD=new Date(parseInt(ano),parseInt(mes)-1,1);
+    const mesesRest=Math.max(0,(prazoD.getFullYear()-hj.getFullYear())*12+(prazoD.getMonth()-hj.getMonth()));
+    if(mesesRest<=2&&mesesRest>0){
+      const falta=m.alvo-m.atual;
+      alertas.push({tipo:'blue',icon:'🎯',txt:`Meta "${m.nome}" termina em ${mesesRest} mês${mesesRest!==1?'es':''}`,sub:`Faltam ${fmt(falta)} para atingir o objetivo.`});
+    }
+  });
+
+  // 8. Tudo ok!
+  if(!alertas.length){
+    alertas.push({tipo:'green',icon:'✅',txt:'Tudo em ordem!',sub:'Sem alertas no momento. Continue assim!'});
+  }
+
+  return alertas;
+}
+
+function getMesAnterior(){
+  const d=new Date();d.setMonth(d.getMonth()-1);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+}
+
+function renderAlertas(){
+  const alertas=gerarAlertas();
+  document.getElementById('listaAlertas').innerHTML=alertas.map(a=>`
+    <div class="alerta-item alerta-${a.tipo}">
+      <div class="alerta-icon">${a.icon}</div>
+      <div>
+        <div class="alerta-txt" style="color:var(--${a.tipo==='red'?'red':a.tipo==='yellow'?'yellow':a.tipo==='blue'?'blue':'green'})">${a.txt}</div>
+        <div class="alerta-sub">${a.sub}</div>
+      </div>
+    </div>`).join('');
+  // Badge no nav se tiver alertas críticos
+  const criticos=alertas.filter(a=>a.tipo==='red').length;
+  const navAlertas=document.querySelectorAll('.nb')[9];
+  if(navAlertas&&criticos>0){
+    navAlertas.style.color='var(--red)';
+  }
+}
+
+// Badge de alertas no painel
+function renderAlertasBadge(){
+  const alertas=gerarAlertas().filter(a=>a.tipo==='red'||a.tipo==='yellow');
+  const el=document.getElementById('dAlertasBadge');
+  if(!el)return;
+  if(alertas.length){
+    el.innerHTML=`<div class="alert awrn" style="cursor:pointer" onclick="goPage('alertas')">🔔 ${alertas.length} alerta(s) ativo(s) — toque para ver</div>`;
+  } else {
+    el.innerHTML='';
+  }
+}
+
 // NAVEGAÇÃO
 function goPage(name){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+name).classList.add('active');
-  const map=['dashboard','hoje','entradas','saidas','relatorio','projecao','config'];
+  const map=['dashboard','hoje','entradas','saidas','relatorio','projecao','metas','recorrentes','alertas','config'];
   document.querySelectorAll('.nb')[map.indexOf(name)]?.classList.add('active');
   if(name==='projecao')renderProjecao();
   if(name==='relatorio'){popMeses('selMesRel');renderRelatorio();}
+  if(name==='metas')renderMetas();
+  if(name==='recorrentes')renderRec();
+  if(name==='alertas')renderAlertas();
   if(name==='config'){document.getElementById('cfgNome').textContent=perfil?.nome||'—';document.getElementById('cfgEmail').textContent=user?.email||'—';document.getElementById('cfgPctVal').textContent=pct+'%';document.getElementById('cfgPct').value=pct;document.getElementById('cfgDiasR').textContent=diasRest()+' dias';document.getElementById('cfgDiasP').textContent=(new Date().getDate()-1)+' dias';popMeses('selMesExport');atualizaTemaUI(document.documentElement.getAttribute('data-theme'));}
   if(name==='entradas'){popMeses('selMesEnt');renderEntradas();}
   if(name==='saidas'){popMeses('selMesSai');renderSaidas();}
   if(name==='hoje')renderHoje();
 }
-function renderAll(){renderDash();renderHoje();popMeses('selMesEnt','selMesSai','selMesExport','selMesRel');renderEntradas();renderSaidas();}
+function renderAll(){renderDash();renderHoje();popMeses('selMesEnt','selMesSai','selMesExport','selMesRel');renderEntradas();renderSaidas();renderAlertasBadge();}
 
 // INIT
 initTema();
