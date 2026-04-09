@@ -826,7 +826,6 @@ function fecharModal(){
   document.getElementById('mTitle').textContent='Novo lançamento';
   document.getElementById('mEditBadge').style.display='none';
 }
-document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))fecharModal();});
 function setModalTipo(t){
   mTipo=t;
   document.getElementById('mBtnEnt').classList.toggle('active',t==='ent');
@@ -918,7 +917,6 @@ function abrirModalMeta(id){
   document.getElementById('modalMeta').classList.add('open');
 }
 function fecharModalMeta(){document.getElementById('modalMeta').classList.remove('open');editandoMetaId=null;}
-document.getElementById('modalMeta').addEventListener('click',e=>{if(e.target===document.getElementById('modalMeta'))fecharModalMeta();});
 
 async function salvarMeta(){
   const nome=document.getElementById('mMetaNome').value.trim();
@@ -1029,7 +1027,6 @@ function abrirModalRec(id){
   document.getElementById('modalRec').classList.add('open');
 }
 function fecharModalRec(){document.getElementById('modalRec').classList.remove('open');editandoRecId=null;}
-document.getElementById('modalRec').addEventListener('click',e=>{if(e.target===document.getElementById('modalRec'))fecharModalRec();});
 
 async function salvarRec(){
   const tipo=document.getElementById('mRecTipo').value;
@@ -1234,6 +1231,14 @@ function goPage(name){
 function renderAll(){renderDash();renderHoje();popMeses('selMesEnt','selMesSai','selMesExport','selMesRel');renderEntradas();renderSaidas();renderAlertasBadge();}
 
 // INIT
+document.addEventListener('DOMContentLoaded', function() {
+  const m1 = document.getElementById('modal');
+  const m2 = document.getElementById('modalMeta');
+  const m3 = document.getElementById('modalRec');
+  if(m1) m1.addEventListener('click',e=>{if(e.target===m1)fecharModal();});
+  if(m2) m2.addEventListener('click',e=>{if(e.target===m2)fecharModalMeta();});
+  if(m3) m3.addEventListener('click',e=>{if(e.target===m3)fecharModalRec();});
+});
 initTema();
 initSupabase().then(()=>verificarSessao());
 </script>
