@@ -159,6 +159,27 @@ select option{background:var(--input-bg);}
 .alerta-yellow{background:rgba(245,200,66,0.06);border-color:rgba(245,200,66,0.2);}
 .alerta-blue{background:rgba(77,166,255,0.06);border-color:rgba(77,166,255,0.2);}
 .alerta-green{background:rgba(0,201,122,0.06);border-color:rgba(0,201,122,0.2);}
+
+/* MÊS GLOBAL */
+.mes-global{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:10px 14px;margin-bottom:12px;
+  box-shadow:var(--shadow);
+}
+.mes-global-inner{display:flex;align-items:center;gap:8px;flex:1;}
+.mes-nav{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);
+  background:var(--input-bg);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:0.9rem;color:var(--text2);transition:all var(--trans);flex-shrink:0;}
+.mes-nav:hover{border-color:var(--green);color:var(--green);}
+.mes-atual-label{font-family:"Montserrat",sans-serif;font-weight:700;font-size:0.88rem;color:var(--text);flex:1;text-align:center;cursor:pointer;}
+.mes-atual-label small{display:block;font-size:0.6rem;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;}
+.mes-hoje-btn{font-size:0.65rem;font-weight:700;color:var(--green);background:rgba(0,201,122,0.1);
+  border:1px solid rgba(0,201,122,0.25);border-radius:99px;padding:3px 9px;cursor:pointer;
+  font-family:"Montserrat",sans-serif;white-space:nowrap;transition:all var(--trans);}
+.mes-hoje-btn:hover{background:rgba(0,201,122,0.2);}
+.mes-futuro{color:var(--dul)!important;}
+.mes-passado{color:var(--text2)!important;}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px;}
 </style>
 </head>
@@ -230,6 +251,16 @@ select option{background:var(--input-bg);}
 
   <!-- PAINEL -->
   <div id="page-dashboard" class="page active">
+    <div class="mes-global" id="mesGlobalDash">
+      <div class="mes-global-inner">
+        <button class="mes-nav" onclick="mudarMes(-1)">‹</button>
+        <div style="flex:1;text-align:center">
+          <div class="mes-atual-label" id="mesGlobalLabel" onclick="voltarHoje()">—<small>toque para voltar ao mês atual</small></div>
+        </div>
+        <button class="mes-nav" onclick="mudarMes(1)">›</button>
+      </div>
+      <button class="mes-hoje-btn" id="mesHojeBtn" onclick="voltarHoje()" style="display:none">Hoje</button>
+    </div>
     <div class="hero"><div class="hero-lbl">Saldo livre do mês</div><div class="hero-val" id="dSaldo">—</div><div class="hero-sub" id="dSaldoSub">—</div></div>
     <div id="dAlerta"></div>
     <div id="dAlertasBadge"></div>
@@ -283,7 +314,12 @@ select option{background:var(--input-bg);}
 
   <!-- ENTRADAS -->
   <div id="page-entradas" class="page">
-    <div class="mf"><span class="mf-lbl">📅 Mês:</span><select id="selMesEnt" onchange="onMesChange()"></select></div>
+    <div class="mes-global">
+      <button class="mes-nav" onclick="mudarMes(-1)">‹</button>
+      <div class="mes-atual-label" id="mesGlobalLabelEnt" style="flex:1;text-align:center">—</div>
+      <button class="mes-nav" onclick="mudarMes(1)">›</button>
+      <button class="mes-hoje-btn" id="mesHojeBtnEnt" onclick="voltarHoje()" style="display:none;margin-left:8px">Hoje</button>
+    </div>
     <div class="clabel" style="margin-bottom:6px">Filtrar por tipo</div>
     <div class="chip-row" id="chipEntTipo">
       <button class="chip active" onclick="setChip('entTipo','Todos',this)">Todos</button>
@@ -300,7 +336,12 @@ select option{background:var(--input-bg);}
 
   <!-- SAÍDAS -->
   <div id="page-saidas" class="page">
-    <div class="mf"><span class="mf-lbl">📅 Mês:</span><select id="selMesSai" onchange="onMesChange()"></select></div>
+    <div class="mes-global">
+      <button class="mes-nav" onclick="mudarMes(-1)">‹</button>
+      <div class="mes-atual-label" id="mesGlobalLabelSai" style="flex:1;text-align:center">—</div>
+      <button class="mes-nav" onclick="mudarMes(1)">›</button>
+      <button class="mes-hoje-btn" id="mesHojeBtnSai" onclick="voltarHoje()" style="display:none;margin-left:8px">Hoje</button>
+    </div>
     <div class="clabel" style="margin-bottom:6px">Filtrar por tipo</div>
     <div class="chip-row" id="chipSaiTipo">
       <button class="chip active" onclick="setChip('saiTipo','Todos',this)">Todos</button>
@@ -330,7 +371,12 @@ select option{background:var(--input-bg);}
 
   <!-- RELATÓRIO -->
   <div id="page-relatorio" class="page">
-    <div class="mf"><span class="mf-lbl">📅 Mês:</span><select id="selMesRel" onchange="renderRelatorio()"></select></div>
+    <div class="mes-global">
+      <button class="mes-nav" onclick="mudarMes(-1)">‹</button>
+      <div class="mes-atual-label" id="mesGlobalLabelRel" style="flex:1;text-align:center">—</div>
+      <button class="mes-nav" onclick="mudarMes(1)">›</button>
+      <button class="mes-hoje-btn" id="mesHojeBtnRel" onclick="voltarHoje()" style="display:none;margin-left:8px">Hoje</button>
+    </div>
     <div class="card">
       <div class="clabel">Entradas vs Saídas — últimos meses</div>
       <div class="chart-wrap"><canvas id="chartBarras" height="200"></canvas></div>
@@ -469,6 +515,7 @@ const DSEM=['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feir
 let sb,user=null,perfil=null,lancs=[],pct=30;
 let hjTipo='sai',mTipo='sai',mesFiltro=null;
 let filtros={entTipo:'Todos',saiTipo:'Todos',saiCat:'Todos'};
+let mesSelecionado=null; // null = mês atual
 let charts={};
 
 async function initSupabase(){
@@ -484,7 +531,7 @@ const diasRest=()=>{const h=new Date(),f=new Date(h.getFullYear(),h.getMonth()+1
 function parseD(s){if(!s||s==='—')return null;const p=s.split('/');if(p.length!==3)return null;return new Date(parseInt(p[2]),parseInt(p[1])-1,parseInt(p[0]));}
 function isAntes(s){const d=parseD(s);if(!d)return false;const h=new Date();h.setHours(0,0,0,0);d.setHours(0,0,0,0);return d<h;}
 function getLancsMes(mes){
-  const m=mes||mesFiltro||mesAtual();
+  const m=mes||mesFiltro||getMesSel();
   const[a,mm]=m.split('-').map(Number);
   return lancs.filter(l=>{
     if(!l.data||l.data==='—')return false;
@@ -564,15 +611,19 @@ async function salvarPct(){const v=parseInt(document.getElementById('cfgPct').va
 async function limparMes(){if(!confirm('Apagar lançamentos deste mês?'))return;const h=new Date(),ini=`${h.getFullYear()}-${String(h.getMonth()+1).padStart(2,'0')}-01`;await sb.from('lancamentos').delete().eq('user_id',user.id).gte('created_at',ini);lancs=lancs.filter(l=>new Date(l.created_at)<new Date(ini));renderAll();}
 
 // CÁLCULO
+function getMesSel(){return mesSelecionado||mesAtual();}
+
 function calc(){
-  const m=mesAtual(),[a,mm]=m.split('-').map(Number);
+  const m=getMesSel(),[a,mm]=m.split('-').map(Number);
   const doMes=getLancsMes(m);
   const ent=doMes.filter(l=>l.tipo==='entrada'),sai=doMes.filter(l=>l.tipo==='saida');
   const tEnt=ent.reduce((a,l)=>a+l.valor,0),tSai=sai.reduce((a,l)=>a+l.valor,0);
   const res=tEnt*(pct/100),sliv=tEnt-tSai-res,hj=hoje();
-  const gAnt=sai.filter(l=>l.data&&l.data!=='—'&&isAntes(l.data)&&l.status==='realizado').reduce((a,l)=>a+l.valor,0);
-  const gHj=sai.filter(l=>l.data===hj&&l.status==='realizado').reduce((a,l)=>a+l.valor,0);
-  const sRest=sliv-gAnt,dr=diasRest(),limBruto=dr>0?sRest/dr:0,limHj=limBruto-gHj;
+  const isMesAtual=getMesSel()===mesAtual();
+  const gAnt=isMesAtual?sai.filter(l=>l.data&&l.data!=='—'&&isAntes(l.data)&&l.status==='realizado').reduce((a,l)=>a+l.valor,0):0;
+  const gHj=isMesAtual?sai.filter(l=>l.data===hj&&l.status==='realizado').reduce((a,l)=>a+l.valor,0):0;
+  const dr=isMesAtual?diasRest():new Date(a,mm,0).getDate();
+  const sRest=isMesAtual?sliv-gAnt:sliv,limBruto=dr>0?sRest/dr:0,limHj=limBruto-gHj;
   const eduE=ent.filter(l=>l.pessoa==='Eduardo').reduce((a,l)=>a+l.valor,0);
   const dulE=ent.filter(l=>l.pessoa==='Dulcineia').reduce((a,l)=>a+l.valor,0);
   return{tEnt,tSai,res,sliv,gAnt,gHj,sRest,dr,limBruto,limHj,eduE,dulE};
@@ -612,7 +663,9 @@ function renderDash(){
   const sl=document.getElementById('dSaldo');sl.textContent=fmt(c.sliv);sl.style.color=c.sliv>=0?'var(--green)':'var(--red)';
   document.getElementById('dSaldoSub').textContent=`após ${pct}% de reserva`;
   document.getElementById('dEnt').textContent=fmt(c.tEnt);document.getElementById('dSai').textContent=fmt(c.tSai);
-  document.getElementById('dRes').textContent=fmt(c.res);document.getElementById('dDias').textContent=c.dr+' dias';
+  document.getElementById('dRes').textContent=fmt(c.res);
+  const isMesSel=getMesSel()===mesAtual();
+  document.getElementById('dDias').textContent=isMesSel?c.dr+' dias':'—';
   document.getElementById('dEdu').textContent=fmt(c.eduE);document.getElementById('dDul').textContent=fmt(c.dulE);
   const p=c.tEnt>0?Math.min(100,((c.tSai+c.res)/c.tEnt)*100):0,pR=c.tEnt>0?Math.min(100,(c.res/c.tEnt)*100):0;
   document.getElementById('dPBar').style.width=p+'%';document.getElementById('dPct').textContent=p.toFixed(0)+'%';
@@ -622,8 +675,16 @@ function renderDash(){
   else if(c.limHj<0)al.innerHTML=`<div class="alert abad">🚨 Limite de hoje ultrapassado em ${fmt(Math.abs(c.limHj))}.</div>`;
   else if(c.limBruto<30)al.innerHTML=`<div class="alert awrn">⚡ Orçamento apertado — ${fmt(c.limBruto)}/dia.</div>`;
   else al.innerHTML=`<div class="alert aok">✅ Finanças no controle!</div>`;
-  renderLimite(c,['dLimVal','dLimInfo','dLimTag']);
-  document.getElementById('dRecentes').innerHTML=lancs.slice(0,5).length?lancs.slice(0,5).map(l=>rItem(l)).join(''):'<div class="empty">Nenhum lançamento ainda.</div>';
+  if(getMesSel()===mesAtual()){
+    document.getElementById('dLimVal').textContent=fmt(Math.max(0,c.limHj));
+    renderLimite(c,['dLimVal','dLimInfo','dLimTag']);
+    document.querySelector('.lim-card').style.display='';
+  } else {
+    document.querySelector('.lim-card').style.display='none';
+  }
+  // Recentes do mês selecionado
+  const recMes=getLancsMes().slice(0,5);
+  document.getElementById('dRecentes').innerHTML=recMes.length?recMes.map(l=>rItem(l)).join(''):'<div class="empty">Nenhum lançamento neste mês.</div>';
 }
 
 function renderHoje(){
@@ -670,7 +731,7 @@ function getMesesDisponiveis(){
 
 async function renderRelatorio(){
   await initChartJS();
-  const mesSel=document.getElementById('selMesRel')?.value||mesAtual();
+  const mesSel=getMesSel();
   const meses=getMesesDisponiveis();
   // últimos 6 meses para gráfico de barras
   const ultimos6=meses.slice(-6);
@@ -1211,6 +1272,59 @@ function renderAlertasBadge(){
   }
 }
 
+
+// ═══════════════════════════════════════
+// NAVEGAÇÃO DE MÊS GLOBAL
+// ═══════════════════════════════════════
+function mudarMes(delta){
+  const base=mesSelecionado||mesAtual();
+  const[a,m]=base.split('-').map(Number);
+  const dt=new Date(a,m-1+delta,1);
+  mesSelecionado=`${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}`;
+  mesFiltro=mesSelecionado;
+  updateMesLabels();
+  // re-render página ativa
+  const pageAtiva=document.querySelector('.page.active')?.id?.replace('page-','');
+  if(pageAtiva==='dashboard')renderDash();
+  else if(pageAtiva==='entradas')renderEntradas();
+  else if(pageAtiva==='saidas')renderSaidas();
+  else if(pageAtiva==='relatorio')renderRelatorio();
+}
+
+function voltarHoje(){
+  mesSelecionado=null;
+  mesFiltro=null;
+  updateMesLabels();
+  const pageAtiva=document.querySelector('.page.active')?.id?.replace('page-','');
+  if(pageAtiva==='dashboard')renderDash();
+  else if(pageAtiva==='entradas')renderEntradas();
+  else if(pageAtiva==='saidas')renderSaidas();
+  else if(pageAtiva==='relatorio')renderRelatorio();
+}
+
+function updateMesLabels(){
+  const m=getMesSel(),ma=mesAtual();
+  const[a,mm]=m.split('-');
+  const nome=MESES[parseInt(mm)-1]+' '+a;
+  const isCurrent=m===ma;
+  const isFuture=m>ma;
+  const estilo=isCurrent?'':isFuture?'color:var(--dul)':'color:var(--text2)';
+  const sub=isCurrent?'mês atual':isFuture?'mês futuro':'mês passado';
+  ['mesGlobalLabel','mesGlobalLabelEnt','mesGlobalLabelSai','mesGlobalLabelRel'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    el.innerHTML=`${nome}<small>${sub}</small>`;
+    el.style.cssText=estilo;
+  });
+  ['mesHojeBtn','mesHojeBtnEnt','mesHojeBtnSai','mesHojeBtnRel'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    el.style.display=isCurrent?'none':'block';
+  });
+  // Sync old selects if they still exist
+  ['selMesEnt','selMesSai','selMesExport','selMesRel'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.value=m;
+  });
+}
+
 // NAVEGAÇÃO
 function goPage(name){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -1219,16 +1333,17 @@ function goPage(name){
   const map=['dashboard','hoje','entradas','saidas','relatorio','projecao','metas','recorrentes','alertas','config'];
   document.querySelectorAll('.nb')[map.indexOf(name)]?.classList.add('active');
   if(name==='projecao')renderProjecao();
-  if(name==='relatorio'){popMeses('selMesRel');renderRelatorio();}
+  if(name==='dashboard'){updateMesLabels();renderDash();}
+  if(name==='relatorio'){updateMesLabels();renderRelatorio();}
   if(name==='metas')renderMetas();
   if(name==='recorrentes')renderRec();
   if(name==='alertas')renderAlertas();
   if(name==='config'){document.getElementById('cfgNome').textContent=perfil?.nome||'—';document.getElementById('cfgEmail').textContent=user?.email||'—';document.getElementById('cfgPctVal').textContent=pct+'%';document.getElementById('cfgPct').value=pct;document.getElementById('cfgDiasR').textContent=diasRest()+' dias';document.getElementById('cfgDiasP').textContent=(new Date().getDate()-1)+' dias';popMeses('selMesExport');atualizaTemaUI(document.documentElement.getAttribute('data-theme'));}
-  if(name==='entradas'){popMeses('selMesEnt');renderEntradas();}
-  if(name==='saidas'){popMeses('selMesSai');renderSaidas();}
+  if(name==='entradas'){updateMesLabels();renderEntradas();}
+  if(name==='saidas'){updateMesLabels();renderSaidas();}
   if(name==='hoje')renderHoje();
 }
-function renderAll(){renderDash();renderHoje();popMeses('selMesEnt','selMesSai','selMesExport','selMesRel');renderEntradas();renderSaidas();renderAlertasBadge();}
+function renderAll(){updateMesLabels();renderDash();renderHoje();popMeses('selMesExport');renderEntradas();renderSaidas();renderAlertasBadge();}
 
 // INIT
 document.addEventListener('DOMContentLoaded', function() {
