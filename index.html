@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DuoCaixa</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--radius:14px;--radius-sm:9px;--trans:0.2s ease;--green:#00c97a;--red:#ff5a5a;--yellow:#f5c842;--blue:#4da6ff;--dul:#e87fd4;}
@@ -470,7 +471,9 @@ let hjTipo='sai',mTipo='sai',mesFiltro=null;
 let filtros={entTipo:'Todos',saiTipo:'Todos',saiCat:'Todos'};
 let charts={};
 
-async function initSupabase(){return new Promise(r=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';s.onload=()=>{sb=window.supabase.createClient(_url,_key);r();};document.head.appendChild(s);});}
+async function initSupabase(){
+  sb = window.supabase.createClient(_url, _key);
+}
 async function initXLSX(){return new Promise(r=>{if(window.XLSX){r();return;}const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';s.onload=r;document.head.appendChild(s);});}
 async function initChartJS(){return new Promise(r=>{if(window.Chart){r();return;}const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';s.onload=r;document.head.appendChild(s);});}
 
